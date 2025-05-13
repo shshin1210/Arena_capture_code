@@ -7,7 +7,7 @@ PNG_NAME = 'capture'
 # streaming configuration
 NUM_IMAGES = 10
 TIMEOUT = 2000 # ms
-NUM_BUFFERS = 1
+NUM_BUFFERS = 2
 
 # camera configuration
 EXPOSURE_LONG = True
