@@ -88,7 +88,7 @@ def streaming_setup(tl_stream_nodemap):
     tl_stream_nodemap['StreamAutoNegotiatePacketSize'].value = True
     tl_stream_nodemap['StreamPacketResendEnable'].value = True
 
-def save_image_mono8_to_png_with_PIL(image_buffer, idx):
+def save_image_mono8_to_png_with_PIL(image_buffer, png_path, idx):
     """
     To save an image Pillow needs an array that is shaped to
     (height, width). In order to obtain such an array we use numpy
@@ -154,7 +154,6 @@ def save_image_mono8_to_png_with_PIL(image_buffer, idx):
 
     # Save image
     print(f'Saving image')
-    png_path = constants.PNG_PATH + '/' + datetime.datetime.now().strftime('_%Y_%m_%d_%H_%M')
     
     if not os.path.isdir(png_path):
         os.makedirs(png_path)
@@ -165,7 +164,6 @@ def save_image_mono8_to_png_with_PIL(image_buffer, idx):
     print(f'Saved image path is: {Path(png_path) / png_name}')
     
 def save_image_opencv(npndarray, png_path, idx):
-    
     
     if not os.path.isdir(png_path):
         os.makedirs(png_path)

@@ -11,7 +11,7 @@ NUM_BUFFERS = 1
 
 # camera configuration
 EXPOSURE_LONG = True
-EXPOSURE_TIME = 20000.0 # us (float)
+EXPOSURE_TIME = 10000.0 # us (float)
 PIXEL_FORMAT = "Mono8"
 WHITE_BALANCING = False # False = white balancing off
 GAIN = 0.0

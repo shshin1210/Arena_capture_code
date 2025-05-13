@@ -175,7 +175,7 @@ def set_gamma(nodemap):
         quit()   
         
     print('Setting Gamma to %d'%(constants.GAMMA))
-    nodes.value = constants.GAIN
+    nodes["Gamma"].value = constants.GAMMA
 
 def set_configuration(nodemap):
     print('Start Setting =================')
@@ -185,5 +185,6 @@ def set_configuration(nodemap):
     set_gain(nodemap)
     set_pixel_format(nodemap)
     set_width_height(nodemap)
+    set_gamma(nodemap)
     
     print('End Setting ===================')
