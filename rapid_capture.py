@@ -74,6 +74,5 @@ def capture_image():
     print(f'Destroyed all created devices')
         
 if __name__ == "__main__":
-    print('start capturing')
     
     capture_image()    
