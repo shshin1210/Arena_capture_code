@@ -7,11 +7,12 @@ PNG_NAME = 'capture'
 # streaming configuration
 NUM_IMAGES = 10
 TIMEOUT = 2000 # ms
-NUM_BUFFERS = 2
+NUM_BUFFERS = 10
 
 # camera configuration
+FRAME_RATE = 60.0 # Hz
 EXPOSURE_LONG = True
-EXPOSURE_TIME = 50000.0 # us (float)
+EXPOSURE_TIME = 10000.0 # us (float)
 PIXEL_FORMAT = "Mono8"
 WHITE_BALANCING = False # False = white balancing off
 GAIN = 0.0

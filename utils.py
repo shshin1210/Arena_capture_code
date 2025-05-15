@@ -19,6 +19,10 @@ import numpy as np
 from pathlib import Path
 import constants
 import cv2, time
+from arena_api import enums
+from arena_api.system import system
+from arena_api.buffer import BufferFactory
+import matplotlib.pyplot as plt
 
 def create_devices_with_tries():
     '''
@@ -173,3 +177,14 @@ def save_image_opencv(npndarray, png_path, idx):
     cv2.imwrite(os.path.join(png_path, png_name), npndarray)
 
     print(f'Saved image path is: {Path(png_path) / png_name}')
+    
+ 
+def show_image(arr):
+    """
+    Showing image GUI opencv
+    """
+    # Converting to BGR8 format
+
+    plt.imshow(arr) 
+    plt.title('Captured image')
+    plt.show()

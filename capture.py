@@ -55,25 +55,22 @@ def capture_image():
     img_cnt = 0
     png_path = constants.PNG_PATH
     
-    with device.start_stream(constants.NUM_BUFFERS):
-        print(f'Stream started with {constants.NUM_BUFFERS} buffers')
+    with device.start_stream(100):
+        print(f'Stream started')
 
         while img_cnt < constants.NUM_IMAGES:
             # Copy buffer and requeue to avoid running out of buffers
             print(f'Grabbing an image buffer')
-            buffer = device.get_buffer(constants.NUM_BUFFERS)
-            buffer_copied = BufferFactory.copy(buffer)
-            device.requeue_buffer(buffer)
-
+            buffer = device.get_buffer()
+                        
             arr = np.array(buffer.data, dtype = np.uint8)
             arr = arr.reshape((buffer.height, buffer.width))
             
+            show_image(arr)
             save_image_opencv(npndarray=arr, idx= img_cnt, png_path=png_path)
             img_cnt +=1
-            
-            # Destroy the copied item to prevent memory leaks
-            BufferFactory.destroy(buffer_copied)
-            
+            device.requeue_buffer(buffer)
+
         # (4) Clean up
         device.stop_stream()
         

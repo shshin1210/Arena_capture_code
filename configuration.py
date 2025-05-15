@@ -52,7 +52,7 @@ def set_exposure(nodemap, long=False):
         4. Increase Exposure Time       
         """
         nodes['AcquisitionFrameRateEnable'].value = True
-        nodes['AcquisitionFrameRate'].value = nodes['AcquisitionFrameRate'].min
+        nodes['AcquisitionFrameRate'].value = constants.FRAME_RATE
         
         # Disable automatic exposure before setting an exposure time. Automatic exposure controls whether the exposure time is set manually or
         # automatically by the device. Setting automatic exposure to 'Off' stops the device from automatically updating the exposure time.
@@ -65,18 +65,16 @@ def set_exposure(nodemap, long=False):
             raise Exception("ExposureTime node not found")
         if not nodes['ExposureTime'].is_writable:
             raise Exception("ExposureTime node is not writable")
-        print(f'Minimizing Acquisition FrameRate and Maximizing Exposure')
-        print(f'Changed Acquisition Frame Rate from {acquisition_fr_initial}'
-                f''' to {nodes['AcquisitionFrameRate'].value}''')
         
-        # Set exposure time to max value
-        nodes['ExposureTime'].value = nodes['ExposureTime'].max
-        
+        if 1/constants.FRAME_RATE < constants.EXPOSURE_TIME*1e-6:
+            print('Allowable exposure time : %6f [sec]'%(1/constants.FRAME_RATE))
+            print('[WARNING] Lower the exposure time!!!!')
+        assert 1/constants.FRAME_RATE > constants.EXPOSURE_TIME*1e-6 # unit to seconds (30 Hz frame rate -> max 1/30 sec exposure)
+            
         # Set exposure time to defined constant value
         nodes['ExposureTime'].value = constants.EXPOSURE_TIME
         
-        print(f'Changed Exposure Time from {exposure_time_initial}'
-                f''' to {nodes['ExposureTime'].value}''')
+        print(f'Acquisition FrameRate to %d HZ and Exposrue %d'%(constants.FRAME_RATE, constants.EXPOSURE_TIME))
         
 def set_binning(nodemap):
     """
